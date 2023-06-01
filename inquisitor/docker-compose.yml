@@ -1,0 +1,46 @@
+version: "1.0"
+
+services:
+
+    server:
+        container_name: server-ftp
+        image: panubo/vsftpd:v1.0.0
+        restart: unless-stopped
+        ports:
+            - "21:21"
+            - "4559-4564:4559-4564"
+        environment:
+            - FTP_USER=root
+            - FTP_PASSWORD=root
+        volumes:
+            - ./shared/volume-server/:/srv
+        networks:
+        - network_inquisitor
+
+    client-ftp:
+        container_name: client-ftp
+        image: lscr.io/linuxserver/filezilla:latest
+        restart: unless-stopped
+        ports:
+            - 3000:3000
+            - 3001:3001
+        volumes:
+            - ./shared/volume-client-ftp/:/client-ftp:rw
+        networks:
+        - network_inquisitor
+
+    attacker:
+        container_name: attacker
+        restart: unless-stopped
+        build:
+            context: attacker
+            dockerfile: Dockerfile.attacker
+        ports:
+            - "8484:8484"
+        volumes:
+            - ./shared/volume-attacker/:/usr/src
+        networks:
+        - network_inquisitor
+
+networks:
+    network_inquisitor:

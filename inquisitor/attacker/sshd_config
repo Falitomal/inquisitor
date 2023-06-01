@@ -1,0 +1,7 @@
+Port 8484
+
+PermitRootLogin yes
+StrictModes no
+PasswordAuthentication yes
+PermitEmptyPasswords yes
+AllowUsers *@*
