@@ -1,5 +1,5 @@
 <h1 align="center">
-📖 Inquisitor | 42 Cybersecurity Bootcam
+📖 Inquisitor | 42 Cybersecurity Bootcamp
 </h1>
 
 <p align="center">
